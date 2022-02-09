@@ -21,14 +21,14 @@ def is_number_with_commas(n):
 def run_test_is_number(n, answer):
     # print message, if it fails the test
     if is_number(n) != answer:
-        print(f'FAIL: is_number({n})')
+        print(f'FAIL: is_number({n}) should be {answer}')
     else: # print dot (on the same line), if it passes the test
         print('.', end='')
     
 def run_test_is_number_with_commas(n, answer):
     # print message, if it fails the test
     if is_number_with_commas(n) != answer:
-        print(f'FAIL: is_number_with_commas({n})')
+        print(f'FAIL: is_number_with_commas({n}) should be {answer}')
     else: # print dot (on the same line), if it passes the test
         print('.', end='')
     
