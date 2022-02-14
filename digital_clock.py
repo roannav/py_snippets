@@ -1,4 +1,4 @@
-#! python3
+#!/usr/bin/env python3
 # Digital clock
 
 from time import strftime, sleep
