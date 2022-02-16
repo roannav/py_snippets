@@ -56,16 +56,18 @@ def e4():
 def e5():
     try:
         lala = 1/0
-    except ZeroDivisionException as ex:
-        print("ZeroDivisionException")
+    except ZeroDivisionError as ex:
+        print("ZeroDivisionError")
         print(ex)
 
 
 def run_tests():
+    '''
     e1()
     e2()
     e3()
     e4()
+    '''
     e5()
 
 run_tests()
