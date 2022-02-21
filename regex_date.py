@@ -9,11 +9,17 @@
 import re
 
 dateRegex = re.compile(r'''
-    (\d{4}\s+\d{2}\s+\d{2}) |            # YYYY MM DD
-    (\d{2}\s+[ADFJMSON][a-z]+\.?\s+\d{4})     # DD Month_name YYYY
+    (\d{4}\s+\d{1,2}\s+\d{1,2}) |            # YYYY MM DD
+    (\d{1,2}\s+[ADFJMSON][a-z]+\.?\s+\d{4})     # DD Month_name YYYY
     ''', re.VERBOSE)
 
+match = dateRegex.search("2022 1 1")
+print(match.group())
+
 match = dateRegex.search("2022 01 01")
+print(match.group())
+
+match = dateRegex.search("1 January 2022")
 print(match.group())
 
 match = dateRegex.search("01 Jan 2022")
@@ -21,4 +27,3 @@ print(match.group())
 
 match = dateRegex.search("01 Jan. 2022")
 print(match.group())
-
