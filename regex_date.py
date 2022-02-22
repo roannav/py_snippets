@@ -58,50 +58,27 @@ year_only_regex = re.compile(r'\d{4}')
 
 
 def test_date_regex():
-    match = date_regex.search("January 1, 2022")
-    print(match.group())
+    test_strs = [
+        "January 1, 2022",
+        "January 1 2022",
+        "1 January 2022",
+        "01 Jan 2022",
+        "01 Jan. 2022",
+        "2022 1 1",
+        "2022 01 01",
+        "1 1 2022",
+        "01 01 2022",
+        "2022 / 1 / 1",
+        "2022/01/01",
+        "1/1/2022",
+        "01 / 01 / 2022",
+        "2022-01-01",
+        "1-1-2022"
+    ]
 
-    match = date_regex.search("January 1 2022")
-    print(match.group())
-
-    match = date_regex.search("1 January 2022")
-    print(match.group())
-
-    match = date_regex.search("01 Jan 2022")
-    print(match.group())
-
-    match = date_regex.search("01 Jan. 2022")
-    print(match.group())
-
-    match = date_regex.search("2022 1 1")
-    print(match.group())
-
-    match = date_regex.search("2022 01 01")
-    print(match.group())
-
-    match = date_regex.search("1 1 2022")
-    print(match.group())
-
-    match = date_regex.search("01 01 2022")
-    print(match.group())
-
-    match = date_regex.search("2022 / 1 / 1")
-    print(match.group())
-
-    match = date_regex.search("2022/01/01")
-    print(match.group())
-
-    match = date_regex.search("1/1/2022")
-    print(match.group())
-
-    match = date_regex.search("01 / 01 / 2022")
-    print(match.group())
-
-    match = date_regex.search("2022-01-01")
-    print(match.group())
-
-    match = date_regex.search("1-1-2022")
-    print(match.group())
+    for s in test_strs:
+        match = date_regex.search(s)
+        print(match.group())
 
 
 # Month_name, YYYY
@@ -113,64 +90,34 @@ def test_date_regex():
 # YYYY MM
 # YYYY/MM or YYYY-MM
 def test_month_year_regex():
-    match = month_year_regex.search("January, 2022")
-    print(match.group())
-
-    match = month_year_regex.search("Jan, 2022")
-    print(match.group())
-
-    match = month_year_regex.search("Jan., 2022")
-    print(match.group())
-
-    match = month_year_regex.search("January 2022")
-    print(match.group())
-
-    match = month_year_regex.search("Jan 2022")
-    print(match.group())
-
-    match = month_year_regex.search("Jan. 2022")
-    print(match.group())
-
-    match = month_year_regex.search("2022, January")
-    print(match.group())
-
-    match = month_year_regex.search("2022, Jan")
-    print(match.group())
-
-    match = month_year_regex.search("2022, Jan.")
-    print(match.group())
-
-    match = month_year_regex.search("2022 January")
-    print(match.group())
-
-    match = month_year_regex.search("2022 Jan")
-    print(match.group())
-
-    match = month_year_regex.search("2022 Jan.")
-    print(match.group())
-
-    match = month_year_regex.search("1 2022")
-    print(match.group())
-
-    match = month_year_regex.search("1/2022")
-    print(match.group())
-
-    match = month_year_regex.search("1-2022")
-    print(match.group())
-
-    match = month_year_regex.search("2022 1")
-    print(match.group())
-
-    match = month_year_regex.search("2022/1")
-    print(match.group())
-
-    match = month_year_regex.search("2022-1")
-    print(match.group())
-
+    test_strs = [
+        "January, 2022",
+        "Jan, 2022",
+        "Jan., 2022",
+        "January 2022",
+        "Jan 2022",
+        "Jan. 2022",
+        "2022, January",
+        "2022, Jan",
+        "2022, Jan.",
+        "2022 January",
+        "2022 Jan",
+        "2022 Jan.",
+        "1 2022",
+        "1/2022",
+        "1-2022",
+        "2022 1",
+        "2022/1",
+        "2022-1",
+        "1-1-2022"
+    ]
     # it will still match the month and year regex,
     # even if it is part of a full month-day-year date
-    match = month_year_regex.search("1-1-2022")   
-    print(match.group())
+
+    for s in test_strs:
+        match = month_year_regex.search(s)
+        print(match.group())
+
 
 
 def test_year_only_regex():
@@ -184,3 +131,5 @@ test_date_regex()
 test_month_year_regex()
 test_year_only_regex()
 
+
+#month_year_regex.sub(
