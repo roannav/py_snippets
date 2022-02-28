@@ -1,7 +1,7 @@
 # Convert other date formats 
 # to Month_name DD, YYYY   (aka Month_name Month_day_number, Year)
 # eg July 2, 1999
-# or to Month_name YYYY, if the day is not given
+# or to Month_name YYYY, if the day is not given  (eg July, 1999)
 
 # Detect and then convert these formats:
 # Month_name DD, YYYY
@@ -47,7 +47,7 @@ month_year_regex = re.compile(r'''
                                          # YYYY Month_name
                    
     (\d{1,2}\s+\d{4}) |                  # MM YYYY
-    (\d{1,2}\s*[/-]?\s*\d{4}) |   i      # MM/YYYY or MM-YYYY
+    (\d{1,2}\s*[/-]?\s*\d{4}) |          # MM/YYYY or MM-YYYY
     (\d{4}\s+\d{1,2}) |                  # YYYY MM
     (\d{4}\s*[/-]?\s*\d{1,2})            # YYYY/MM/DD or YYYY-MM-DD
     ''', re.VERBOSE)
@@ -55,6 +55,7 @@ month_year_regex = re.compile(r'''
 
 # YYYY
 year_only_regex = re.compile(r'\d{4}')
+
 
 
 def test_date_regex():
@@ -132,4 +133,3 @@ test_month_year_regex()
 test_year_only_regex()
 
 
-#month_year_regex.sub(
