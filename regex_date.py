@@ -58,6 +58,26 @@ year_only_regex = re.compile(r'\d{4}')
 
 
 
+# It's a year, if it's not part of date or month format and it looks 
+# like a year.
+def is_year_only(s):
+    return date_regex.search(s) == None and \
+           month_year_regex.search(s) == None and \
+           year_only_regex.search(s) != None
+
+
+# It's a month and year format, if it's not part of full date format 
+# and it looks like a month and year.
+def is_month_and_year_only(s):
+    return date_regex.search(s) == None and \
+           month_year_regex.search(s) != None
+
+
+# It's a month, day, and year format
+def is_full_date(s):
+    return date_regex.search(s) != None
+
+
 def test_date_regex():
     test_strs = [
         "January 1, 2022",
@@ -80,6 +100,12 @@ def test_date_regex():
     for s in test_strs:
         match = date_regex.search(s)
         print(match.group())
+
+    print("\n2022 is full date?", is_full_date("2022"))
+    print("May, 2022 is full date?", is_full_date("May, 2022"))
+    print("May 9, 2022 is full date?", is_full_date("May 9, 2022"))
+    print("")
+
 
 
 # Month_name, YYYY
@@ -119,6 +145,13 @@ def test_month_year_regex():
         match = month_year_regex.search(s)
         print(match.group())
 
+    print("\n2022 is month and year only?", is_month_and_year_only("2022"))
+    print("May, 2022 is month and year only?", 
+      is_month_and_year_only("May, 2022"))
+    print("May 9, 2022 is month and year only?", 
+      is_month_and_year_only("May 9, 2022"))
+    print("")
+
 
 
 def test_year_only_regex():
@@ -127,9 +160,13 @@ def test_year_only_regex():
     match = year_only_regex.search("1-1-2022")
     print(match.group())   # 2022
 
+    print("\n2022 is year only?", is_year_only("2022"))
+    print("May, 2022 is year only?", is_year_only("May, 2022"))
+    print("May 9, 2022 is year only?", is_year_only("May 9, 2022"))
+    print("")
+
+
 
 test_date_regex()
 test_month_year_regex()
 test_year_only_regex()
-
-
