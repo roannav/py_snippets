@@ -33,12 +33,14 @@ import re
 
 date_regex = re.compile(r'''
     (([ADFJMSON][a-z]+)\.?\s+(\d{1,2}),?\s+(\d{4})) |  # Month_name DD, YYYY or
-                                                   # Month_name DD YYYY
-    (\d{1,2}\s+[ADFJMSON][a-z]+\.?\s+\d{4}) |      # DD Month_name YYYY
-    (\d{4}\s+\d{1,2}\s+\d{1,2}) |                  # YYYY MM DD
-    (\d{4}\s*[/-]?\s*\d{1,2}\s*[/-]?\s*\d{1,2}) |  # YYYY/MM/DD or YYYY-MM-DD
-    (\d{1,2}\s+\d{1,2}\s+\d{4}) |                  # MM DD YYYY
-    (\d{1,2}\s*[/-]?\s*\d{1,2}\s*[/-]?\s*\d{4})    # MM/DD/YYYY or MM-DD-YYYY
+                                                       # Month_name DD YYYY
+    ((\d{1,2})\s+([ADFJMSON][a-z]+)\.?\s+(\d{4})) |    # DD Month_name YYYY
+    ((\d{4})\s+(\d{1,2})\s+(\d{1,2})) |                # YYYY MM DD
+    ((\d{4})\s*[/-]?\s*(\d{1,2})\s*[/-]?\s*(\d{1,2})) |  # YYYY/MM/DD or 
+                                                         # YYYY-MM-DD
+    ((\d{1,2})\s+(\d{1,2})\s+(\d{4})) |                  # MM DD YYYY
+    ((\d{1,2})\s*[/-]?\s*(\d{1,2})\s*[/-]?\s*(\d{4}))    # MM/DD/YYYY or 
+                                                         # MM-DD-YYYY
     ''', re.VERBOSE)
 
 
@@ -67,8 +69,6 @@ numeric_month_only_regex = re.compile(r'\d{1,2}')
 
 VALID_DATE_STRS = [
     "January 1, 2022",
-]
-'''
     "January 1 2022",
     "1 January 2022",
     "01 Jan 2022",
@@ -84,7 +84,6 @@ VALID_DATE_STRS = [
     "2022-01-01",
     "1-1-2022"
 ]
-'''
 
 VALID_MONTH_YEAR_STRS = [
     "January, 2022",
@@ -182,27 +181,24 @@ def to_standard_date(s):
 
     elif is_full_date(s):
         match = date_regex.search(s)
-        print(match.groups())
-        '''
-        month = match.group(2) or match.group(6) or match.group(8) or \
-            match.group(11) or match.group(15) or match.group(18)
+        #print(match.groups())
+
+        month = match.group(2) or match.group(7) or match.group(11) or \
+            match.group(15) or match.group(18) or match.group(22)
         month = to_month_name(month)
         #print(f"Month is {month}\n\n")
 
-        year = match.group(3) or match.group(5) or match.group(9) or \
-            match.group(12) or match.group(14) or match.group(17)
+        day = match.group(3) or match.group(6) or match.group(12) or \
+            match.group(16) or match.group(19) or match.group(23)
+        if day[0] == '0':   # remove leading 0
+            day = day[1]
+        #print(f"Day is {day}\n\n")
+
+        year = match.group(4) or match.group(8) or match.group(10) or \
+            match.group(14) or match.group(20) or match.group(24)
         #print(f"Year is {year}\n\n")
-        '''
-        '''
-        0 1 2
-        3 4 5
-        6 7 8
-        9 10 11
-        12 13 14
-        15 16 17
-        '''
-        #return month + " " + day + ", " + year
-        return "TODO"
+
+        return month + " " + day + ", " + year
 
 
 
@@ -240,7 +236,6 @@ def test_month_year_regex():
     for s in test_strs:
         match = month_year_regex.search(s)
         print(match.group())
-
 
     print("\n2022 is month and year only?", is_month_and_year_only("2022"))
     print("May, 2022 is month and year only?", 
@@ -289,21 +284,24 @@ def test():
 
 
     print("\n\nto_standard_date(s)")
-    '''
+    
     print(to_standard_date("2022"))
 
     for s in VALID_MONTH_YEAR_STRS:
         print(to_standard_date(s))
 
-    '''
     for s in VALID_DATE_STRS:
         print(to_standard_date(s))
 
 
 
+def run_tests():
+    test_date_regex()
+    test_month_year_regex()
+    test_year_only_regex()
+    test_to_month_name()
+    test()
 
-test_date_regex()
-test_month_year_regex()
-test_year_only_regex()
-test_to_month_name()
-test()
+
+
+run_tests()
