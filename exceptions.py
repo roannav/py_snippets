@@ -99,6 +99,15 @@ def e9():
         print("Done with e9()")
 
 
+def e10():
+    try:
+        input("Enter some text: (Ctrl-C to generate KeyboardInterrupt)  ")
+    except KeyboardInterrupt as ex:
+        print("\nKeyboardInterrupt exception occurred.")
+        print(ex)
+        logging.exception("Printing stack trace")
+
+
 
 def run_tests():
     '''
@@ -107,10 +116,11 @@ def run_tests():
     e3()
     e4()
     e5()
-    '''
     e6()
     e7()
     #e8()
     e9()
+    '''
+    e10()
 
 run_tests()
