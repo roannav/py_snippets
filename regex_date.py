@@ -4,7 +4,7 @@
 # Converts other date formats 
 # to Month_name DD, YYYY   (aka Month_name Month_day_number, Year)
 # eg July 2, 1999
-# or to Month_name YYYY, if the day is not given  (eg July, 1999)
+# or to Month_name, YYYY if the day is not given  (eg July, 1999)
 
 # Detects and then converts these formats:
 # Month_name DD, YYYY
