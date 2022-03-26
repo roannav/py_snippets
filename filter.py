@@ -51,3 +51,27 @@ capital_words_filter2 = filter( lambda item: item[1].istitle() , d.items())
 print(list(capital_words_filter2))
 
 
+
+######## filter a list with another list ########
+
+teas = ["Earl Grey", "Green", "Hibiscus", "Black"]
+
+def tea_removal_filter( beverages):
+    return list(filter(lambda x: x not in teas, beverages))
+
+def tea_filter( beverages):
+    return list(filter(lambda x: x in teas, beverages))
+
+beverages = ["Soda", "Earl Grey", "Milk", "Hibiscus", "Coffee"]
+
+print(tea_removal_filter( beverages))  # remove teas from the list
+print(tea_filter( beverages))   # leave only the teas in the list
+
+
+
+def vowel_removal_filter( s):
+    return list(filter(lambda x: x not in ['a','e','i','o','u'], s))
+
+s = "Rosa Bonheur was a French artist known best as a painter of animals. She also made sculpture in a realist style."
+
+print(''.join(vowel_removal_filter( s)))
