@@ -1,3 +1,5 @@
+# List comprehensions are usually faster than for loops.
+
 ###################################################
 #
 #  Filter a list using list comprehension
