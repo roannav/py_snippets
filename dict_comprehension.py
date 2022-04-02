@@ -28,3 +28,17 @@ print("\nReorder?: reorder or enough")
 reorder2 = { k:"reorder" if v<50 else "enough" for k,v in d.items()}
 print(reorder2)
 
+
+print("\nEasiest way: Combine 2 lists (or tuples) into 1 dictionary...")
+print("dict(zip( keys_list, values_list))")
+inv = ('shirt', 'pants', 'tie', 'hat', 'socks')
+count = [10, 8, 2, 0, 20]
+d2 = dict(zip(inv,count))
+print(d2)
+
+
+print("\nTo filter or transform the data, while also combining")
+print("2 lists (or tuples) into 1 dictionary...")
+print("Dictionary comprehension using zip().")
+d3 = {k:v for k,v in zip(inv,count) if v >=10}
+print(d3)
